@@ -6,9 +6,9 @@
     "ghcr.io/devcontainers/features/git:1": {}
   },
   "forwardPorts": [3000],
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y libmongocrypt-dev && npm install",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y curl gnupg extrepo && sudo extrepo enable libmongocrypt || echo 'Error: extrepo enable' && curl -sL https://www.mongodb.org/static/pgp/libmongocrypt.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/libmongocrypt.gpg || echo 'Error: GPG key' && echo 'deb https://libmongocrypt.s3.amazonaws.com/apt/ubuntu bionic/libmongocrypt/1.14 universe' | sudo tee /etc/apt/sources.list.d/libmongocrypt.list && sudo apt-get update || echo 'Error: apt update' && sudo apt-get install -y libmongocrypt-dev || echo 'Error: libmongocrypt install' && (cd backend && npm install || echo 'Error: npm install backend') && (cd frontend && npm install || echo 'Error: npm install frontend')",
   "containerEnv": {
-    "SHARED_LIB_PATH": "/usr/lib/mongo_crypt_v1.so"
+    "SHARED_LIB_PATH": "/usr/lib/libmongocrypt.so"
   },
   "customizations": {
     "vscode": {

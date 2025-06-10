@@ -6,7 +6,7 @@ import  generateRandomUsers  from "./helpers.js"
 const CUSTOMER_MASTER_KEY = 'Mng0NCt4ZHVUYUJCa1kxNkVyNUR1QURhZ2h2UzR2d2RrZzh0cFBwM3R6NmdWMDFBMUN3YkQ5aXRRMkhGRGdQV09wOGVNYUMxT2k3NjZKelhaQmRCZGJkTXVyZG9uSjFk';
 const localKey = { key: Buffer.from(CUSTOMER_MASTER_KEY, 'base64') };
 
-const uri = 'YOUR_MONGO_URI';
+const uri = 'mongodb+srv://fabian:guevara@demo.lfvxb.mongodb.net/?retryWrites=true&w=majority&appName=DEMO';
 const keyVaultDB = 'encryption';
 const keyVaultCollection = '__keyVault';
 const dbName = 'medicalRecords';
@@ -15,9 +15,9 @@ const collectionName = 'patients';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const cryptSharedLibPath = path.join(__dirname, 'lib', 'mongo_crypt_v1.dylib');
+const cryptSharedLibPath = path.join(__dirname, 'lib', 'mongo_crypt_v1.so');
 
-
+console.log(cryptSharedLibPath)
 const encOptions = {
   keyVaultNamespace: `${keyVaultDB}.${keyVaultCollection}`,
   kmsProviders: { local: localKey },
