@@ -57,25 +57,7 @@ The `libmongocrypt` library is required for Queryable Encryption and is referenc
    ```
    This places `mongo_crypt_v1.dylib` in `/usr/local/lib` or `/opt/homebrew/lib`.
 
-2. **Build from Source (Alternative)**:
-   - Clone the repository:
-     ```bash
-     git clone https://github.com/mongodb/libmongocrypt.git
-     cd libmongocrypt
-     ```
-   - Create a build directory:
-     ```bash
-     mkdir cmake-build && cd cmake-build
-     ```
-   - Configure:
-     ```bash
-     cmake ..
-     ```
-   - Build and install:
-     ```bash
-     make
-     sudo make install
-     ```
+
    - Copy `mongo_crypt_v1.dylib` (from the build directory) to `backend/lib/mongo_crypt_v1.dylib` in the project.
 
 #### Windows
