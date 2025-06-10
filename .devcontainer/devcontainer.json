@@ -1,0 +1,21 @@
+{
+  "name": "MongoDB Queryable Encryption Lab",
+  "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:18",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "forwardPorts": [3000],
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y libmongocrypt-dev && npm install",
+  "containerEnv": {
+    "SHARED_LIB_PATH": "/usr/lib/mongo_crypt_v1.so"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mongodb.mongodb-vscode",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}
