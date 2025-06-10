@@ -6,7 +6,7 @@ import  generateRandomUsers  from "./helpers.js"
 const CUSTOMER_MASTER_KEY = 'Mng0NCt4ZHVUYUJCa1kxNkVyNUR1QURhZ2h2UzR2d2RrZzh0cFBwM3R6NmdWMDFBMUN3YkQ5aXRRMkhGRGdQV09wOGVNYUMxT2k3NjZKelhaQmRCZGJkTXVyZG9uSjFk';
 const localKey = { key: Buffer.from(CUSTOMER_MASTER_KEY, 'base64') };
 
-const uri = 'mongodb+srv://fabian:guevara@demo.lfvxb.mongodb.net/?retryWrites=true&w=majority&appName=DEMO';
+const uri = 'URI';
 const keyVaultDB = 'encryption';
 const keyVaultCollection = '__keyVault';
 const dbName = 'medicalRecords';
