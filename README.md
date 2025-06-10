@@ -55,7 +55,7 @@ The `libmongocrypt` library is required for Queryable Encryption and is referenc
    ```bash
    brew install mongodb/brew/libmongocrypt
    ```
-   This places `mongo_crypt_v1.dylib` in `/usr/local/lib` or `/opt/homebrew/lib`.
+   This places `mongo_crypt_v1.dylib` in `/usr/local/lib` or `/opt/homebrew/lib`. Make sure to place it under `/backend/lib`
 
 2. **Build from Source (Alternative)**:
    - Clone the repository:
