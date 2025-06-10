@@ -47,50 +47,57 @@ npm install
 ```
 This installs `mongodb` and `mongodb-client-encryption` for the backend and React dependencies for the frontend as specified in each `package.json`.
 
-### Install MongoDB `libmongocrypt` Library
-The `libmongocrypt` library is required for Queryable Encryption and is referenced in `qe.js`. Install it for your operating system.
+Installation
 
-#### macOS
-1. **Install via Homebrew**:
-   ```bash
-   brew install mongodb/brew/libmongocrypt
-   ```
-   This places `mongo_crypt_v1.dylib` in `/usr/local/lib` or `/opt/homebrew/lib`.
+1. Download the latest crypt_shared library
+
+The stand-alone crypt_shared library is required for automatic encryption. Choose the correct version based on your operating system and hardware.
+
+macOS
+
+Ensure you select the correct hardware target for your Mac (arm64 for M1/M2/M3, x86_64 for legacy Intel).
+
+# For arm64 (M1/M2/M3)
+curl -L https://downloads.mongodb.com/osx/mongo_crypt_shared_v1-macos-arm64-enterprise-8.0.4.tgz | tar xzvf - lib/mongo_crypt_v1.dylib
+
+# Remove quarantine attribute
+xattr -d com.apple.quarantine ./mongo_crypt_v1.dylib
+
+Windows (x64)
+
+Download the MongoDB Enterprise Server installer:
 
 
-   - Copy `mongo_crypt_v1.dylib` (from the build directory) to `backend/lib/mongo_crypt_v1.dylib` in the project.
 
-#### Windows
-1. **Download Prebuilt Binaries**:
-   - Download `libmongocrypt` binaries from: https://github.com/mongodb/libmongocrypt/releases
-   - Extract and rename the DLL to `mongo_crypt_v1.dll`.
-   - Place `mongo_crypt_v1.dll` in `backend/lib/mongo_crypt_v1.dll` in the project.
 
-2. **Build from Source (Alternative)**:
-   - Install Visual Studio with C++ tools (e.g., Visual Studio Community 2022).
-   - Install CMake:
-     ```powershell
-     winget install Kitware.CMake
-     ```
-   - Clone the repository:
-     ```powershell
-     git clone https://github.com/mongodb/libmongocrypt.git
-     cd libmongocrypt
-     ```
-   - Create a build directory:
-     ```powershell
-     mkdir cmake-build
-     cd cmake-build
-     ```
-   - Configure:
-     ```powershell
-     cmake -G "Visual Studio 17 2022" ..
-     ```
-   - Build:
-     ```powershell
-     cmake --build . --config Release
-     ```
-   - Rename `libmongocrypt.dll` (from the `Release` folder) to `mongo_crypt_v1.dll` and copy it to `backend/lib/mongo_crypt_v1.dll`.
+
+URL: https://downloads.mongodb.com/windows/mongodb-windows-x86_64-enterprise-8.0.4-signed.msi
+
+
+
+After installation, locate the mongo_crypt_v1.dll file in the bin directory
+
+
+
+Move mongo_crypt_v1.dll to a myproj/lib folder in your project
+
+Linux (AWS Linux, Debian, Ubuntu)
+
+Visit https://www.mongodb.com/download-center/enterprise/releases to download the appropriate crypt_shared library.
+
+
+
+
+
+Ensure you select the correct hardware type (ARM vs x86_64)
+
+
+
+Download ONLY the stand-alone crypt_shared package for your distribution
+
+
+
+Extract and place the mongo_crypt_v1.so file in your project’s lib directory
 
 **Note**: macOS and Windows use native encryption APIs, so OpenSSL is not required. Ensure `mongo_crypt_v1.dylib` (macOS) or `mongo_crypt_v1.dll` (Windows) is in `backend/lib/` as `qe.js` expects it there.
 
