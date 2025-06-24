@@ -34,16 +34,67 @@ function App() {
     handleSSNSearch();
   };
 
+  const translations = {
+    spanish: {
+      title: "Gestión de Pacientes",
+      searchButton: "Buscar",
+      searchBoxPlaceholder: "Buscar por SSN...",
+      addPatientButton: "Agregar Paciente",
+      rangeSearchButton: "Buscar por Rango",
+      addPatientForm: {
+        title: "Nuevo Paciente",
+        name: "Nombre",
+        dob: "Fecha de Nacimiento",
+        ssn: "SSN",
+        cardNumber: "Numero de Tarjeta",
+        cancelButton: "Cancelar",
+        saveButton: "Guardar"
+      }
+    },
+    portuguese: {
+      title: "Gestão de Pacientes",
+      searchButton: "Buscar",
+      searchBoxPlaceholder: "Buscar por CPF...",
+      addPatientButton: "Adicionar Paciente",
+      rangeSearchButton: "Buscar por Intervalo",
+      addPatientForm: {
+        title: "Novo Paciente",
+        name: "Nome",
+        dob: "Data de Nascimento",
+        ssn: "CPF",
+        cardNumber: "Número do Cartão",
+        cancelButton: "Cancelar",
+        saveButton: "Salvar"
+      }
+    },
+    english: {
+      title: "Patient Management",
+      searchButton: "Search",
+      searchBoxPlaceholder: "Search by SSN...",
+      addPatientButton: "Add Patient",
+      rangeSearchButton: "Search by Range",
+      addPatientForm: {
+        title: "New patient",
+        name: "Name",
+        dob: "Date of birth",
+        ssn: "SSN",
+        cardNumber: "Card number",
+        cancelButton: "Cancel",
+        saveButton: "Save"
+      }
+    }
+  };
+
   return (
     <div className="p-6 max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">Gestión de Pacientes</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">{translations.portuguese.title}</h1>
 
       <div className="mb-6">
         <div className="flex items-center gap-2 mb-4">
           <div className="flex-grow relative">
             <input
               type="text"
-              placeholder="Buscar por SSN..."
+              placeholder={translations.portuguese.searchBoxPlaceholder}
               className="w-full border rounded-full px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-green-600"
               value={searchSSN}
               onChange={(e) => setSearchSSN(e.target.value)}
@@ -54,13 +105,13 @@ function App() {
             onClick={handleSSNSearch}
             className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition"
           >
-            Buscar
+            {translations.portuguese.searchButton}
           </button>
           <button
             onClick={() => setShowModal(true)}
             className="bg-green-700 text-white px-4 py-2 rounded-full hover:bg-green-800 transition"
           >
-            Agregar Paciente
+            {translations.portuguese.addPatientButton}
           </button>
         </div>
 
@@ -87,7 +138,7 @@ function App() {
             onClick={handleRangeSearch}
             className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition"
           >
-            Buscar por Rango
+            {translations.portuguese.rangeSearchButton}
           </button>
         </div>
       </div>
@@ -95,10 +146,10 @@ function App() {
       <div className="space-y-4">
         {patients.map((p, i) => (
           <div key={i} className="border rounded-lg p-4 shadow-md bg-white">
-            <p><strong>Nombre:</strong> {p.name}</p>
-            <p><strong>Fecha de Nacimiento:</strong> {p.dob}</p>
-            <p><strong>SSN:</strong> {p.patientRecord.ssn}</p>
-            <p><strong>Numero de Tarjeta:</strong> {p.patientRecord.billing.number}</p>
+            <p><strong>{translations.portuguese.addPatientForm.name}:</strong> {p.name}</p>
+            <p><strong>{translations.portuguese.addPatientForm.dob}:</strong> {p.dob}</p>
+            <p><strong>{translations.portuguese.addPatientForm.ssn}:</strong> {p.patientRecord.ssn}</p>
+            <p><strong>{translations.portuguese.addPatientForm.cardNumber}:</strong> {p.patientRecord.billing.number}</p>
           </div>
         ))}
       </div>
@@ -106,31 +157,31 @@ function App() {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h2 className="text-2xl font-bold mb-4">Nuevo Paciente</h2>
+            <h2 className="text-2xl font-bold mb-4">{translations.portuguese.addPatientForm.title}</h2>
             <input
               type="text"
-              placeholder="Nombre"
+              placeholder={translations.portuguese.addPatientForm.name}
               className="w-full border rounded-lg px-4 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-green-600"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
             <input
               type="date"
-              placeholder="Fecha de Nacimiento"
+              placeholder={translations.portuguese.addPatientForm.dob}
               className="w-full border rounded-lg px-4 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-green-600"
               value={formData.dob}
               onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
             />
             <input
               type="text"
-              placeholder="SSN"
+              placeholder={translations.portuguese.addPatientForm.ssn}
               className="w-full border rounded-lg px-4 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-green-600"
               value={formData.ssn}
               onChange={(e) => setFormData({ ...formData, ssn: e.target.value })}
             />
             <input
               type="text"
-              placeholder="Teléfono"
+              placeholder={translations.portuguese.addPatientForm.cardNumber}
               className="w-full border rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-green-600"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -140,13 +191,13 @@ function App() {
                 onClick={() => setShowModal(false)}
                 className="bg-gray-300 text-black px-4 py-2 rounded-full hover:bg-gray-400 transition"
               >
-                Cancelar
+                {translations.portuguese.addPatientForm.cancelButton}
               </button>
               <button
                 onClick={handleAddPatient}
                 className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition"
               >
-                Guardar
+                {translations.portuguese.addPatientForm.saveButton}
               </button>
             </div>
           </div>
