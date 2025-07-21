@@ -18,10 +18,8 @@ app.post("/api/patients", async (req, res) => {
     const parsedUser = {
       name,
       dob: new Date(dob),
-      dob_unencrypted: new Date(dob),
       patientRecord: {
         ssn,
-        ssn_unencrypted: ssn,
         billing: {
           type: "visa",
           number: "1000 1000 1000 1000",

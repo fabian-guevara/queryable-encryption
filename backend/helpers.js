@@ -9,10 +9,8 @@ function createRandomUser() {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     dob: dob,
-    dob_unencrypted: dob,
     patientRecord: {
       ssn: ssn,
-      ssn_unencrypted: ssn,
       billing: {
         type: faker.finance.creditCardIssuer(),
         number: faker.finance.creditCardNumber(),

@@ -1,10 +1,17 @@
+
+// IMPORTING MODULES
+
 import { MongoClient, ClientEncryption } from 'mongodb';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import generateRandomUsers from './helpers.js';
 import dotenv from 'dotenv';
 
+// LOADING CONFIG FILE
+
 dotenv.config();
+
+// DEFINING CONSTANTS
 
 const uri = process.env.MONGODB_URL;
 
@@ -30,14 +37,20 @@ const encOptions = {
 
 let collection; // will hold the encrypted collection
 
+// CONNECTING TO DATABASE WITH ENCRYPTION OPTIONS
+
 const clientEncrypted = new MongoClient(uri, { autoEncryption: encOptions });
 await clientEncrypted.connect();
 
+// INITIALIZING CLIENT ENCRYPTION INSTANCE
+
 const clientEncryption = new ClientEncryption(clientEncrypted, encOptions);
 
-// Drop existing collections (demo only)
+// DROP EXISTING COLLECTIONS (DEMO ONLY)
 await clientEncrypted.db(keyVaultDB).dropDatabase().catch(() => null);
 await clientEncrypted.db(dbName).dropDatabase().catch(() => null);
+
+// DEFINING THE ENCRYPTED COLLECTION OPTIONS
 
 const minDobDate = new Date('1900-01-01');
 const maxDobDate = new Date('2100-12-31');
@@ -52,6 +65,8 @@ const collOptions = {
   }
 };
 
+// CREATING ENCRYPTED COLLECTION
+
 const db = clientEncrypted.db(dbName);
 const result = await clientEncryption.createEncryptedCollection(
   db,
@@ -62,13 +77,16 @@ const result = await clientEncryption.createEncryptedCollection(
 collection = result.collection;
 console.log('Encrypted collection initialized');
 
-// seed database 
+// GENERATE RANDOM PATIENTS
+
 const randomPatients = generateRandomUsers(100);
 const seedResult = await collection.insertMany(randomPatients);
 
 if (seedResult.acknowledged) {
   console.log("Database seeded.")
 }
+
+// CRUD FUNCTIONS
 
 export async function createUser(patient) {
   return await collection.insertOne(patient);
